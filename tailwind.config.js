@@ -5,7 +5,18 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    fontSize: {
+      sm: '14px',
+      base: '16px',
+      xl: '24px',
+      '2xl': '30px',
+      '3xl': '35px',
+      '4xl': '40px',
+      '5xl': '45px',
+    },
+    extend: {
+      
+    },
   },
   plugins: [],
 }
