@@ -9,3 +9,21 @@
         font-family: "SUSE", sans-serif;
     }
 }
+
+@layer components {
+    /* For WebKit browsers (Chrome, Safari) */
+    .todayTimesContentContainer::-webkit-scrollbar {
+        display: none; /* Hide scrollbar */
+    }
+
+    /* For Firefox */
+    .todayTimesContentContainer {
+        scrollbar-width: none; /* Hide scrollbar */
+    }
+    
+    /* For Internet Explorer and Edge */
+    .todayTimesContentContainer {
+    -ms-overflow-style: none; /* Hide scrollbar */
+    }
+
+}
