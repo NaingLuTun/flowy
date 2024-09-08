@@ -14,23 +14,23 @@ const Body = () => {
     <>
         <Header />
         {/* Marked */}
-        <div className="p-4 mt-[85px] flex-col md:flex md:flex-row md:gap-5 mainContent">
+        <div className="p-4 mt-[55px] flex-col md:flex md:flex-row md:gap-5 mainContent">
             
             <div className="md:w-[38%] md:fixed md:top-18  currentContionAndFiveDaysForecastContainer"> 
-                <div className='bg-slate-200 rounded-xl pr-4 pl-4 pt-4 pb-4 mb-4 currentConditionContainer'>
+                <div className='bg-slate-200 rounded-xl pr-4 pl-4 pt-2 pb-2 mb-4 currentConditionContainer'>
 
                     <h2 className='text-xl font-medium currentConditionHeader'>Now</h2>
 
-                    <div className="flex justify-between degreeAndWeatherCondition">
-                        <p className="relative text-[70px]">20<span className="absolute top-[10px] text-3xl degreeSymbol">°c</span></p>
+                    <div className="flex justify-between items-center h-auto degreeAndWeatherCondition">
+                        <p className="relative h-full text-5xl">20<span className="absolute top-0 text-2xl degreeSymbol">°c</span></p>
                         
                         {/* Replace with icons provided from open weather map api */}
-                        <img src={windyIcon} alt="weather condition" className="w-[70px]" />
+                        <img src={windyIcon} alt="weather condition" className="w-[45px] h-fit" />
                     </div>
 
                     <h2 className="text-xl font-medium airCondition">Windy</h2>
 
-                    <hr className="bg-black mt-4 mb-4"/>
+                    <hr className="bg-black mt-3 mb-3 lg:h-[2px]"/>
                     
                     <div className="dateAndLocationContainer">
                         <div className="flex gap-2 dateContainer">
@@ -47,11 +47,11 @@ const Body = () => {
                     </div>
                 </div>
 
-                <div className="bg-slate-200 rounded-xl pr-4 pl-4 pt-4 pb-4 mb-4 fiveDaysForecastContainer">
+                <div className="bg-slate-200 rounded-xl pr-4 pl-4 pt-2 pb-2 mb-4 fiveDaysForecastContainer">
                     <p className="text-xl font-medium mb-4 fiveDaysForecastHeader">5 days forecast</p>
 
                     {fiveDaysArr.map((_, index) => (
-                        <div key={index} className="flex items-center justify-between mt-5 mb-5">
+                        <div key={index} className="flex items-center justify-between pt-[6px] pb-[6px]">
                             <div className=" flex gap-2 degreeIconAndDegreeContainer">
                                 {/* Replace with icons provided from open weather map api */}
                                 <img src={moonIcon} alt="degree icon" className="w-8"/>
@@ -71,7 +71,7 @@ const Body = () => {
             
             {/* Marked */}
             <div className="md:w-[58%] md:ml-[42%] todayHighlightsAndTodayTimesContainer">
-                <div className="bg-slate-200 rounded-xl pr-4 pl-4 pt-4 pb-4 mb-4 todayHighlightsContainer">
+                <div className="bg-slate-200 rounded-xl pr-4 pl-4 pt-2 pb-2 mb-4 todayHighlightsContainer">
 
                     <h2 className="text-xl font-medium mb-4 todayHighlightsHeader">Today Highlights</h2>
 
@@ -223,7 +223,7 @@ const Body = () => {
                                 <img src={windyIcon} alt="feelsLike icon" className="w-8 feelsLikeIcon" />
 
                                 {/* Replace with the feelsLike provided from the api */}
-                                <p className="text-xl font-medium relative feelsLike ">20<span className="text-[20px] absolute top-0 feelsLikeUnit">°c</span></p>
+                                <p className="text-xl pr-[15px] font-medium relative feelsLike ">20<span className="text-[15px] absolute top-0 feelsLikeUnit">°c</span></p>
                             </div>
                         </div>
                     </div>
@@ -233,21 +233,21 @@ const Body = () => {
                 <div className="mb-8 mt-10 todayTimesContainer">
                     <h2 className="text-xl font-medium mb-4  todayTimesHeader">Today at</h2>
 
-                    <div className="overflow-x-auto w-[100%] grid grid-cols-[repeat(8,minmax(110px,1fr))] gap-4 todayTimesContentContainer">
+                    <div className="overflow-x-auto w-[100%] grid grid-cols-[repeat(8,minmax(84px,1fr))] gap-3 todayTimesContentContainer">
                         {todayTimesArr.map((time, index) => (
-                            <div className="bg-slate-300 rounded-xl flex flex-col w-[110px] pt-4 pb-4 items-center individualTimeContainer" key={index}>
-                                <p className="text-xl font-medium timeText">{time}</p>
+                            <div className="bg-slate-300 rounded-xl flex flex-col w-[84px] pt-2 pb-2 items-center individualTimeContainer" key={index}>
+                                <p className="text-base font-medium timeText">{time}</p>
                                 <img src={moonIcon} alt="times icon" className="w-[40px] md:w-[50px] timesIcon" />
-                                <p className="text-xl font-medium timesTemperature">
+                                <p className="text-base font-medium timesTemperature">
                                     25°
                                 </p>
                             </div>
                         ))}
                         {todayTimesArr.map((time, index) => (
-                            <div className="bg-slate-300 rounded-xl flex flex-col w-[110px] pt-4 pb-4 items-center individualTimeContainer" key={index}>
-                                <p className="text-xl font-medium timeText">{time}</p>
+                            <div className="bg-slate-300 rounded-xl flex flex-col w-[84px] pt-2 pb-2 items-center individualTimeContainer" key={index}>
+                                <p className="text-base font-medium timeText">{time}</p>
                                 <img src={moonIcon} alt="times icon" className="w-[40px] md:w-[50px] timesIcon" />
-                                <p className="text-xl font-medium timesWindSpeed">
+                                <p className="text-base font-medium timesWindSpeed">
                                     11 km/h
                                 </p>
                             </div>

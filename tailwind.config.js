@@ -8,7 +8,7 @@ export default {
     fontSize: {
       sm: '14px',
       base: '16px',
-      xl: '24px',
+      xl: '20px',
       '2xl': '30px',
       '3xl': '35px',
       '4xl': '40px',
