@@ -5,7 +5,7 @@ import lightModeIcon from "./assets/light-mode-icon.svg"
 import darkModeIcon from "./assets/dark-mode-icon.svg"
 import searchIcon from "./assets/search-icon.svg"
 import currentLocationIcon from "./assets/current-location-icon.svg"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import SearchModal from "./SearchModal"
 
 import {useMediaQuery} from "react-responsive"
@@ -54,18 +54,21 @@ const Header = () => {
       fetch(`${apiInfo.base}weather?q=${searchValue}&units=metric&APPID=${apiInfo.key}`)
       .then((res) => res.json())
       .then((result) => {
-        console.log(result)
-        setMainApiValue(result)
-        const {lat, lon} = result.coord
-
-        
-        /* Air pollution api */
-        fetch(`${apiInfo.base}air_pollution?lat=${lat}&lon=${lon}&APPID=${apiInfo.key}`)
-        .then((res) => res.json())
-        .then((result) => {
+        if (result.coord) {  // Ensure result.coord exists
           console.log(result)
-          setAirPollutionApiValue(result)
-        })
+          setMainApiValue(result)
+          const { lat, lon } = result.coord
+  
+          // Air pollution API
+          fetch(`${apiInfo.base}air_pollution?lat=${lat}&lon=${lon}&APPID=${apiInfo.key}`)
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result)
+              setAirPollutionApiValue(result)
+            })
+        } else {
+          console.error("Invalid response from weather API:", result)
+        }
       })
     }
 
@@ -75,22 +78,24 @@ const Header = () => {
       .then((res) => res.json())
       .then((result) => {
         getMonthTofilterFromForecastApi()
-        const getApiList = result.list
+        if(result.list) {
+          const getApiList = result.list
 
         
-        const filteredTodayDateList = getApiList.filter((date:any) => !date.dt_txt.includes(dateToFilter))
-        const filteredMidddayList = filteredTodayDateList.filter((midday:any) => midday.dt_txt.includes("15:00:00"))
-        const lastItemFromFilteredTodayDateList = filteredTodayDateList[filteredTodayDateList.length - 1]
+          const filteredTodayDateList = getApiList.filter((date:any) => !date.dt_txt.includes(dateToFilter))
+          const filteredMidddayList = filteredTodayDateList.filter((midday:any) => midday.dt_txt.includes("15:00:00"))
+          const lastItemFromFilteredTodayDateList = filteredTodayDateList[filteredTodayDateList.length - 1]
 
-        const finalfilteredApiList = filteredMidddayList.concat(lastItemFromFilteredTodayDateList)
-        
-        
-        console.log(getApiList)
-        console.log(filteredTodayDateList)
-        console.log(filteredMidddayList)
-        console.log(finalfilteredApiList)
+          const finalfilteredApiList = filteredMidddayList.concat(lastItemFromFilteredTodayDateList)
 
-        setForecastApiValue(finalfilteredApiList)
+          setForecastApiValue(finalfilteredApiList)
+        } else {
+          console.error("Error fetching forecast data")
+        }
+        
+      })
+      .catch((error) => {
+        console.error("Erro in fetch", error)
       })
     }
 
@@ -98,6 +103,14 @@ const Header = () => {
       fetchMainApiAndAirPollutionApi(searchValue)
       fetchFiveDaysForecastApi(searchValue)
     }
+
+    const randomCities = ["london", "new york", "tokyo", "paris"]
+
+    useEffect(() => {
+      const getRandomCity = randomCities[Math.floor(Math.random() * randomCities.length)]
+      fetchMainApiAndAirPollutionApi(getRandomCity)
+      fetchFiveDaysForecastApi(getRandomCity)
+    },[])
 
   return (
     <div className={`p-2 pl-4 pr-4 border-b-[1px] border-solid border-black border-opacity-50 shadow-lg flex justify-between fixed w-[100%] top-0 z-10 ${darkTheme? "bg-[#171717]" : "bg-white"} headerContainer`}>
@@ -112,11 +125,11 @@ const Header = () => {
             <div className="gap-3  align-middle flex">
 
               <div className="relative searchBarContainer">
-                <input type="text" className={`${darkTheme? "bg-slate-300 text-white" : "bg-slate-200"} p-2 pl-3 pr-[40px] w-[200px] rounded-full focus:outline-none`} value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search location... "/>
+                <input type="text" className={`${darkTheme? "bg-slate-300 text-white" : "bg-slate-200"} p-2 pl-4 pr-[40px] w-[200px] rounded-full focus:outline-none`} value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Search location... "/>
                 <img onClick={() => handleSearch(searchValue)} src={searchIcon} alt="search icon" className="w-[25px] md:w-[35px] absolute right-[2px] top-[2px] bg-blue-400 rounded-full p-1 hover:cursor-pointer searchIcon"/>
               </div>
 
-              <div className="p-2 pl-3 font-medium text-white relative flex w-[200px] bg-[#cebdf3] rounded-full hover:cursor-pointer currentLocationContainer">
+              <div className="p-2 pl-4 font-medium text-white relative flex w-[200px] bg-[#cebdf3] rounded-full hover:cursor-pointer currentLocationContainer">
                 <p>Current location</p>
                 <img src={currentLocationIcon} alt="current location icon" className="w-[25px] md:w-[35px] absolute right-[2px] top-[2px] bg-[#b7a0e7] rounded-full hover:cursor-pointer currentLocationIcon" />
               </div>

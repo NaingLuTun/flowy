@@ -60,17 +60,26 @@ const Body = () => {
 
     
 
+        let mainWeatherIcon: string;
+        let mainIconUrl:string
 
-    const mainWeatherIcon = mainApiValue?.weather[0]?.icon
-    const mainIconUrl = `http://openweathermap.org/img/wn/${mainWeatherIcon}@2x.png`
+        let sunriseTimeStamp:number
+        let sunsetTimeStamp:number
+        let timezoneOffset:number
 
-    const sunriseTimeStamp = mainApiValue?.sys?.sunrise
-    const sunsetTimeStamp = mainApiValue?.sys?.sunset
-    const timezoneOffset = mainApiValue?.timezone
-
-    const sunriseTime = new Date((sunriseTimeStamp + timezoneOffset) * 1000).toLocaleTimeString('en-US', { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' })
-    const sunsetTime = new Date((sunsetTimeStamp + timezoneOffset) * 1000).toLocaleTimeString('en-US', { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' })
+        let sunriseTime;
+        let sunsetTime;
     
+    if(mainApiValue && mainApiValue.weather && mainApiValue.weather[0]) {
+        mainWeatherIcon = mainApiValue?.weather[0].icon
+        mainIconUrl = `http://openweathermap.org/img/wn/${mainWeatherIcon}@2x.png`
+        sunriseTimeStamp = mainApiValue?.sys?.sunrise
+        sunsetTimeStamp = mainApiValue?.sys?.sunset
+        timezoneOffset = mainApiValue?.timezone
+        sunriseTime = new Date((sunriseTimeStamp + timezoneOffset) * 1000).toLocaleTimeString('en-US', { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' })
+        sunsetTime = new Date((sunsetTimeStamp + timezoneOffset) * 1000).toLocaleTimeString('en-US', { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' })
+    }
+
     
   return (
     <>
@@ -88,7 +97,7 @@ const Body = () => {
                             <p className={`${darkTheme? "text-white" : "text-black"} relative h-full text-5xl`}>{Math.round(mainApiValue?.main?.temp)}<span className="absolute top-0 text-2xl degreeSymbol">°c</span></p>
                             
                             {/* Replace with icons provided from open weather map api */}
-                            <img src={mainIconUrl} alt="weather condition" className="w-[70px] bg-slate-800 rounded-full" />
+                            <img src={mainIconUrl!} alt="weather condition" className="w-[70px] bg-slate-800 rounded-full" />
                         </div>
 
                         <h2 className={`${darkTheme? "text-white" : "text-black"} text-xl font-medium airCondition`}>{mainApiValue?.weather[0]?.description}</h2>
@@ -262,7 +271,7 @@ const Body = () => {
                         </div>
                         
                         <div className="flex w-[100%] flex-col md:flex-row md:gap-4 visibilityAndFeelsLikeContainer">
-                            <div className={`${darkTheme? "bg-[#0f0f0f]" : "bg-slate-300"} bg-slate-300 rounded-xl pr-4 pl-4 pt-4 pb-4 mb-4 w-[100%] visibilityContainer`}>
+                            <div className={`${darkTheme? "bg-[#0f0f0f]" : "bg-slate-300"} rounded-xl pr-4 pl-4 pt-4 pb-4 mb-4 w-[100%] visibilityContainer`}>
 
                                 <h3 className={`${darkTheme? "text-white" : "text-black"} text-[20px] opacity-80 mb-4 visibilityHeader`}>Visibility</h3>
 
@@ -276,7 +285,7 @@ const Body = () => {
                                 </div>
                             </div>
 
-                            <div className={`${darkTheme? "bg-[#0f0f0f]" : "bg-slate-300"} bg-slate-300 rounded-xl pr-4 pl-4 pt-4 pb-4 mb-4 w-[100%] feelsLikeContainer`}>
+                            <div className={`${darkTheme? "bg-[#0f0f0f]" : "bg-slate-300"} rounded-xl pr-4 pl-4 pt-4 pb-4 mb-4 w-[100%] feelsLikeContainer`}>
 
                                 <h3 className={`${darkTheme? "text-white" : "text-black"} text-[20px] opacity-80 mb-4 feelsLinkHeader`}>Feels Like</h3>
 
