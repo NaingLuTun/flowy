@@ -8,10 +8,10 @@ interface SearchModalProps {
 
 const SearchModal = ({setSearchActive}: SearchModalProps) => {
   return (
-    <div className='bg-white absolute h-[100%] w-[100%] top-0 left-0'>
+    <div className='bg-white absolute z-10 h-[100vh] w-[100%] top-0 left-0'>
         <div className='p-4 flex gap-4 border-b-[1px] border-solid border-black border-opacity-50 shadow-md searchModalHeader'>
             <img onClick={() => setSearchActive(false)} src={backArrowIcon} alt="back icon" className="w-[40px] md:w-[50px] hover:cursor-pointer bg-gray-400 rounded-full backArrowIcon" />
-            <input type="text" className="p-2 focus:outline-none flex-grow" placeholder="Search" autoFocus/>
+            <input type="text" className="p-2 bg-slate-200 rounded-3xl focus:outline-none flex-grow" placeholder="Search" autoFocus/>
         </div>
         
         <div className="p-4 searchItemsContainer">

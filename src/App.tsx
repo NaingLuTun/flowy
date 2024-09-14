@@ -1,13 +1,16 @@
 import Body from "./Body"
 
-
+import ApiContextProvider from "./ApiContextProvider"
 
 function App() {
 
   return (
-    <div>
-      <Body />
-    </div>
+    <>
+      <ApiContextProvider>
+        <Body />
+      </ApiContextProvider>
+      
+    </>
   )
 }
 
