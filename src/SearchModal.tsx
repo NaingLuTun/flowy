@@ -151,8 +151,8 @@ const SearchModal = ({setSearchActive}: SearchModalProps) => {
               <>
                 {suggestions.map((suggestions, index) => (
                 <div key={index} onClick={() =>
-                  handleChoice(suggestions)} className={`flex gap-1 items-center ${darkTheme? "hover:bg-[#1c1c1c]" : "hover:bg-gray-200"} hover:cursor-pointer rounded-md pt-3 pb-3 mt-2 mb-2 border-b-slate-800 border-b-[1px] border-opacity-50 shadow-md  individualSearchItemsContainer`}>
-                    <img src={blackLocationPinIcon} alt="location icon" className="w-[30px] md:w-[50px] locationPinIcon" />
+                  handleChoice(suggestions)} className={`flex gap-1 items-center ${darkTheme? "hover:bg-[#1c1c1c]" : "hover:bg-gray-200"} hover:cursor-pointer rounded-md p-3 mt-2 mb-2 border-b-slate-800 border-b-[1px] border-opacity-50 shadow-md  individualSearchItemsContainer`}>
+                    <img src={blackLocationPinIcon} alt="location icon" className="w-[30px] h-[30px] p-[2px] bg-slate-800 rounded-full md:w-[50px] locationPinIcon" />
                       <p className={`${darkTheme? "text-white":"text-black"} `}>{suggestions}</p>
                 </div>
                 ))}

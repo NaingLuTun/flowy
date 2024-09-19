@@ -1,7 +1,7 @@
 import Header from "./Header"
 
-import blackCalender from "./assets/calender-svgrepo-com.svg"
-import blackLocationPinIcon from "./assets/location-pin-svgrepo-com.svg"
+import calendarIcon from "./assets/calender-svgrepo-com.svg"
+import locationIcon from "./assets/location-pin-svgrepo-com.svg"
 import moonIcon from "./assets/moon-svgrepo-com.svg"
 import sunIcon from "./assets/sun-svgrepo-com.svg"
 
@@ -108,14 +108,14 @@ const Body = () => {
                         
                         <div className="dateAndLocationContainer">
                             <div className="flex gap-2 mb-2 dateContainer">
-                                <img src={blackCalender} alt="calender icon" className="w-6" />
+                                <img src={calendarIcon} alt="calendar icon" className="w-8 h-8 p-1 rounded-full bg-slate-800" />
 
                                 {/* make the day display dynamically either by api or man */}
                                 <p className={`text-[20px] ${darkTheme? "text-white" : "text-black"} opacity-80 dateText`}>{`${dayName} ${day}, ${monthName!}`}</p>
                             </div>
 
                             <div className="flex gap-2 locationContainer">
-                                <img src={blackLocationPinIcon} alt="location icon" className="w-6" />
+                                <img src={locationIcon} alt="location icon" className="w-8 h-8 p-[2px] rounded-full bg-slate-800" />
                                 <p className={`text-[20px] ${darkTheme? "text-white" : "text-black"} opacity-80 locationText`}>{mainApiValue?.name}, {mainApiValue?.sys?.country}</p>
                             </div>
                         </div>
@@ -319,8 +319,8 @@ const Body = () => {
         </div>
             
         :   
-            <div className={`w-[100%] h-[100%] ${darkTheme? "bg-black": "bg-white" }`}>
-                <div className="absolute mainLoader"></div>
+            <div className={`w-[100%] h-[100%] flex justify-center items-center ${darkTheme? "bg-black": "bg-white" }`}>
+                <div className="mainLoader"></div>
             </div>
             
         }
