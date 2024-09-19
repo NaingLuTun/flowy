@@ -7,6 +7,14 @@
 @layer base {
     html {
         font-family: "SUSE", sans-serif;
+        height: 100%;
+    }
+    body {
+      height: 100%;
+    }
+
+    #root {
+      height: 100%;
     }
 
     
@@ -28,5 +36,46 @@
     -ms-overflow-style: none; /* Hide scrollbar */
     }
 
+    .loader {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: inline-block;
+        border-top: 3px solid rgb(255, 102, 0);
+        border-right: 3px solid transparent;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+
+      .mainLoader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: inline-block;
+        border-top: 3px solid rgb(255, 102, 0);
+        border-right: 3px solid transparent;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      } 
+
+
+      .suggestionsListElement:last-of-type {
+        border: none;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
 
 }

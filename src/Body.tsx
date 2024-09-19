@@ -1,6 +1,7 @@
 import Header from "./Header"
-import blackCalender from "./assets/black-calender-icon.svg"
-import blackLocationPinIcon from "./assets/black-location-pin-icon.svg"
+
+import blackCalender from "./assets/calender-svgrepo-com.svg"
+import blackLocationPinIcon from "./assets/location-pin-svgrepo-com.svg"
 import moonIcon from "./assets/moon-svgrepo-com.svg"
 import sunIcon from "./assets/sun-svgrepo-com.svg"
 
@@ -18,6 +19,7 @@ import "./Global.css"
 import { useContext } from "react"
 import { ApiContext } from "./ApiContextProvider"
 const Body = () => {
+
     const fiveDaysArr: Array<number> = [1,2,3,4,5]
 
     const apiContext = useContext(ApiContext)
@@ -25,7 +27,7 @@ const Body = () => {
         throw new Error("problem with context")
     }
 
-    const {mainApiValue, forecastApiValue, airPollutionApiValue, darkTheme} = apiContext
+    const {mainApiValue, forecastApiValue, airPollutionApiValue, darkTheme, loadingApi} = apiContext
 
     const todayDate = new Date()
 
@@ -85,11 +87,11 @@ const Body = () => {
     <>
         <Header />
         {/* Marked */}
-        {mainApiValue && airPollutionApiValue && forecastApiValue ? 
-        <>
-            <div className={`p-4 mt-[55px] flex-col md:flex md:flex-row w-[100%] md:gap-5 ${darkTheme? "bg-black" : "bg-white"} mainContent`}>
+        {mainApiValue && airPollutionApiValue && forecastApiValue && !loadingApi ? 
+        <div className={`w-[100%] h-[100%] flex flex-col bodyContainer`}>
+            <div className={`p-4 pt-[70px] flex-col flex-1 gap-4 lg:flex lg:flex-row w-[100%] h-fit  ${darkTheme? "bg-black" : "bg-white"} mainContent`}>
                 {/* <button onClick={handleConsoleLog} className="bg-slate-800">CONSOLE LOG</button> */}
-                <div className="w-[100%]  currentContionAndFiveDaysForecastContainer"> 
+                <div className="w-[100%] h-fit  currentContionAndFiveDaysForecastContainer"> 
                     <div className={`${darkTheme? "bg-[#171717]" : "bg-slate-200"} rounded-xl pr-4 pl-4 pt-2 pb-2 mb-4 currentConditionContainer`}>
                         <h2 className={`${darkTheme? "text-white" : "text-black"} text-xl font-medium mb-4 currentConditionHeader`}>Now</h2>
 
@@ -119,7 +121,7 @@ const Body = () => {
                         </div>
                     </div>
 
-                    <div className={`${darkTheme? "bg-[#171717]" : "bg-slate-200"} rounded-xl pr-4 pl-4 pt-4 pb-4  fiveDaysForecastContainer`}>
+                    <div className={`${darkTheme? "bg-[#171717]" : "bg-slate-200"} rounded-xl pr-4 pl-4 pt-4 pb-4 mb-4  fiveDaysForecastContainer`}>
                         <p className={`${darkTheme? "text-white" : "text-black"} text-xl font-medium mb-4 fiveDaysForecastHeader`}>5 days forecast</p>
 
                         {nextFiveDaysNames.map((dayNames, index) => (
@@ -142,7 +144,7 @@ const Body = () => {
                 </div>
                 
                 {/* Marked */}
-                <div className="w-[100%] todayHighlightsAndTodayTimesContainer">
+                <div className="w-[100%] h-fit todayHighlightsAndTodayTimesContainer">
                     <div className={`${darkTheme? "bg-[#171717]" : "bg-slate-200"} rounded-xl pr-4 pl-4 pt-2 pb-2 mb-4 todayHighlightsContainer`}>
 
                         <h2 className={`${darkTheme? "text-white" : "text-black"} text-xl font-medium mb-4 todayHighlightsHeader`}>Today Highlights</h2>
@@ -219,7 +221,7 @@ const Body = () => {
                                         <p className={`${darkTheme? "text-white" : "text-black"} text-base opacity-80 sunriseText`}>Sunrise</p>
 
                                         {/* Replace with the time provided from the api */}
-                                        <p className={`${darkTheme? "text-white" : "text-black"} text-xl font-medium sunriseTime`}>{sunriseTime}</p>
+                                        <p className={`${darkTheme? "text-white" : "text-black"} text-nowrap text-xl font-medium sunriseTime`}>{sunriseTime}</p>
                                     </div>
                                     
                                 </div>
@@ -232,7 +234,7 @@ const Body = () => {
                                         <p className={`${darkTheme? "text-white" : "text-black"} text-base opacity-80 sunsetText`}>Sunset</p>
 
                                         {/* Replace with the time provided from the api */}
-                                        <p className={`${darkTheme? "text-white" : "text-black"} text-xl font-medium sunsetText`}>{sunsetTime}</p>
+                                        <p className={`${darkTheme? "text-white" : "text-black"} text-nowrap text-xl font-medium sunsetText`}>{sunsetTime}</p>
                                     </div>
                                     
                                 </div>  
@@ -305,7 +307,7 @@ const Body = () => {
                 </div>
                 
             </div>
-            <footer className={`${darkTheme? "bg-black text-white" : "bg-white text-black"} pt-8`}>
+            <footer className={`${darkTheme? "bg-black text-white" : "bg-white text-black"} pb-5 flex flex-col justify-center items-center`}>
                     <p className={` text-[20px] text-center`}>Copyright 2024 Naing Lu Tun, All Rights Reserved</p>
 
                     <div className="flex items-center justify-center w-[100%] gap-4 poweredByContainer">
@@ -314,12 +316,13 @@ const Body = () => {
                     </div>
                     
             </footer>
-        </>
+        </div>
             
-        :
-            <div className="text-5xl mt-[300px]">
-                Loading
+        :   
+            <div className={`w-[100%] h-[100%] ${darkTheme? "bg-black": "bg-white" }`}>
+                <div className="absolute mainLoader"></div>
             </div>
+            
         }
         
     </>

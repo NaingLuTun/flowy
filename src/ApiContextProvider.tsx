@@ -15,6 +15,8 @@ interface ApiType {
   setTemperatureAtHoursApiValue: React.Dispatch<any | undefined>
   darkTheme: boolean
   setDarkTheme: React.Dispatch<React.SetStateAction<boolean>>
+  loadingApi: boolean
+  setLoadingApi: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const ApiContext = createContext<ApiType | undefined>(undefined)
@@ -26,9 +28,9 @@ const ApiContextProvider = ({children}: ApiContextProps) => {
   const [airPollutionApiValue, setAirPollutionApiValue] = useState<any | undefined>(undefined)
   const [temperatureAtHoursApiValue, setTemperatureAtHoursApiValue] = useState<any | undefined>(undefined)
   const [darkTheme, setDarkTheme] = useState<boolean>(false)
-
+  const [loadingApi, setLoadingApi] = useState<boolean>(false)
   return (
-    <ApiContext.Provider value={{mainApiValue, setMainApiValue, forecastApiValue, setForecastApiValue, airPollutionApiValue, setAirPollutionApiValue, temperatureAtHoursApiValue, setTemperatureAtHoursApiValue, darkTheme, setDarkTheme}}>
+    <ApiContext.Provider value={{mainApiValue, setMainApiValue, forecastApiValue, setForecastApiValue, airPollutionApiValue, setAirPollutionApiValue, temperatureAtHoursApiValue, setTemperatureAtHoursApiValue, darkTheme, setDarkTheme, loadingApi, setLoadingApi}}>
       {children}
     </ApiContext.Provider>
   )
