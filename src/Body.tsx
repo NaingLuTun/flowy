@@ -99,7 +99,7 @@ const Body = () => {
                             <p className={`${darkTheme? "text-white" : "text-black"} relative h-full text-5xl`}>{Math.round(mainApiValue?.main?.temp)}<span className="absolute top-0 text-2xl degreeSymbol">°c</span></p>
                             
                             {/* Replace with icons provided from open weather map api */}
-                            <img src={mainIconUrl!} alt="weather condition" className="w-[70px] bg-slate-800 rounded-full" />
+                            <img src={mainIconUrl!} alt="weather condition" className="w-[100px] bg-slate-800 rounded-full" />
                         </div>
 
                         <h2 className={`${darkTheme? "text-white" : "text-black"} text-xl font-medium airCondition`}>{mainApiValue?.weather[0]?.description}</h2>
@@ -107,15 +107,15 @@ const Body = () => {
                         <hr className="bg-black mt-4 mb-4 lg:h-[2px]"/>
                         
                         <div className="dateAndLocationContainer">
-                            <div className="flex gap-2 mb-2 dateContainer">
-                                <img src={calendarIcon} alt="calendar icon" className="w-8 h-8 p-1 rounded-full bg-slate-800" />
+                            <div className="flex items-center gap-2 mb-2 dateContainer">
+                                <img src={calendarIcon} alt="calendar icon" className="w-10 h-10 p-1 rounded-full bg-slate-800" />
 
                                 {/* make the day display dynamically either by api or man */}
                                 <p className={`text-[20px] ${darkTheme? "text-white" : "text-black"} opacity-80 dateText`}>{`${dayName} ${day}, ${monthName!}`}</p>
                             </div>
 
                             <div className="flex gap-2 locationContainer">
-                                <img src={locationIcon} alt="location icon" className="w-8 h-8 p-[2px] rounded-full bg-slate-800" />
+                                <img src={locationIcon} alt="location icon" className="w-10 h-10 p-[2px] rounded-full bg-slate-800" />
                                 <p className={`text-[20px] ${darkTheme? "text-white" : "text-black"} opacity-80 locationText`}>{mainApiValue?.name}, {mainApiValue?.sys?.country}</p>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ const Body = () => {
                             <div key={index} className="flex items-center justify-between pt-[10px] pb-[10px]">
                                 <div className=" w-[100px] flex gap-2 degreeIconAndDegreeContainer">
                                     {/* Replace with icons provided from open weather map api */}
-                                    {forecastApiValue && <img src={`http://openweathermap.org/img/wn/${forecastApiValue[index]?.weather[0]?.icon}@2x.png`} alt="degree icon" className="w-8 rounded-full bg-slate-800"/>}
+                                    {forecastApiValue && <img src={`http://openweathermap.org/img/wn/${forecastApiValue[index]?.weather[0]?.icon}@2x.png`} alt="degree icon" className="w-10 rounded-full bg-slate-800"/>}
                                     <p className={`text-[20px] ${darkTheme? "text-white" : "text-black"} font-medium forecastDegree`}>{Math.round(forecastApiValue[index]?.main?.feels_like)}°</p>
                                 </div>
 
@@ -159,7 +159,7 @@ const Body = () => {
                             </h3>
 
                             <div className="flex w-[100%] justify-between items-center md:gap-3 airQualityContentContainer">
-                                <img src={windyIcon} alt="air quality icon" className="w-[40px] md:w-[50px] p-1 bg-slate-800 rounded-full airQualityIcon" />
+                                <img src={windyIcon} alt="air quality icon" className="w-[50px] lg:w-[78px] p-1 bg-slate-800 rounded-full airQualityIcon" />
 
                                 <div className="grid grid-cols-2 gap-4  md:flex md:gap-0 airQualityInfoContainer">
 
@@ -215,7 +215,7 @@ const Body = () => {
                                 <div className="flex flex-col md:flex-row md:items-center md:gap-4 sunriseContainer">
 
                                     {/* Replace with icon provided from api if possible */}
-                                    <img src={sunIcon} alt="sun icon" className="w-[40px] p-1 rounded-full bg-slate-800 md:w-[50px] sunriseIcon"/>
+                                    <img src={sunIcon} alt="sun icon" className="w-[50px] lg:w-[70px] p-1 rounded-full bg-slate-800 sunriseIcon"/>
                                     
                                     <div className="sunriseInfoContainer">
                                         <p className={`${darkTheme? "text-white" : "text-black"} text-base opacity-80 sunriseText`}>Sunrise</p>
@@ -228,7 +228,7 @@ const Body = () => {
 
                                 <div className="flex flex-col md:flex-row md:items-center md:gap-4 sunsetContainer">
                                     {/* Replace with icon provided from api if possible */}
-                                    <img src={moonIcon} alt="moon icon" className="w-[40px] p-1 rounded-full bg-slate-800 md:w-[50px] sunsetIcon"/>
+                                    <img src={moonIcon} alt="moon icon" className="w-[50px] lg:w-[70px] p-1 rounded-full bg-slate-800 sunsetIcon"/>
 
                                     <div className="sunsetInfoContiner">
                                         <p className={`${darkTheme? "text-white" : "text-black"} text-base opacity-80 sunsetText`}>Sunset</p>
@@ -247,10 +247,10 @@ const Body = () => {
 
                                 <h3 className={`${darkTheme? "text-white" : "text-black"} text-[20px] opacity-80 mb-4 humidityHeader`}>Humidity</h3>
 
-                                <div className="flex w-[100%] justify-between humidityContentContainer">
+                                <div className="flex w-[100%] justify-between items-center humidityContentContainer">
                                     
                                     {/* Replace with icon provided from the api */}
-                                    <img src={humidityIcon} alt="humidity icon" className="w-8 p-1 bg-slate-800 rounded-full humidityIcon" />
+                                    <img src={humidityIcon} alt="humidity icon" className="w-10 lg:w-[60px] p-1 bg-slate-800 rounded-full humidityIcon" />
 
                                     {/* Replace with the humidity  provided from the api */}
                                     <p className={`${darkTheme? "text-white" : "text-black"} text-xl font-medium humidityPercent`}>{mainApiValue?.main?.humidity}<span className="text-[20px] percent">%</span></p>
@@ -261,10 +261,10 @@ const Body = () => {
 
                                 <h3 className={`${darkTheme? "text-white" : "text-black"} text-[20px] opacity-80 mb-4 pressureHeader`}>Pressure</h3>
 
-                                <div className="flex w-[100%] justify-between pressureContentContainer">
+                                <div className="flex w-[100%] justify-between items-center pressureContentContainer">
 
                                     {/* Replace with icon provided from the api */}
-                                    <img src={pressureIcon} alt="pressure icon" className="w-8 p-1 bg-slate-800 rounded-full pressureIcon" />
+                                    <img src={pressureIcon} alt="pressure icon" className="w-10 lg:w-[60px] p-1 bg-slate-800 rounded-full pressureIcon" />
 
                                     {/* Replace with the pressure provided from the api */}
                                     <p className={`${darkTheme? "text-white" : "text-black"} text-xl font-medium pressure`}>{mainApiValue?.main?.pressure}<span className="text-[20px] pressureUnit">hPa</span></p>
@@ -277,10 +277,10 @@ const Body = () => {
 
                                 <h3 className={`${darkTheme? "text-white" : "text-black"} text-[20px] opacity-80 mb-4 visibilityHeader`}>Visibility</h3>
 
-                                <div className="flex w-[100%] justify-between visibilityContentContainer">
+                                <div className="flex w-[100%] justify-between items-center visibilityContentContainer">
 
                                     {/* Replace with icon provided from the api */}
-                                    <img src={visibilityIcon} alt="visibility icon" className="w-8 p-1 bg-slate-800 rounded-full visibilityIcon" />
+                                    <img src={visibilityIcon} alt="visibility icon" className="w-10 lg:w-[60px] p-1 bg-slate-800 rounded-full visibilityIcon" />
 
                                     {/* Replace with the visibility provided from the api */}
                                     <p className={`${darkTheme? "text-white" : "text-black"} text-xl font-medium visibility`}>{mainApiValue?.visibility / 1000}<span className="text-[20px] visibilityUnit">km</span></p>
@@ -291,10 +291,10 @@ const Body = () => {
 
                                 <h3 className={`${darkTheme? "text-white" : "text-black"} text-[20px] opacity-80 mb-4 feelsLinkHeader`}>Feels Like</h3>
 
-                                <div className="flex w-[100%] justify-between feelsLikeContentContainer">
+                                <div className="flex w-[100%] justify-between items-center feelsLikeContentContainer">
 
                                     {/* Replace with icon provided from the api */}
-                                    <img src={temperatureIcon} alt="feelsLike icon" className="w-8 p-1 bg-slate-800 rounded-full feelsLikeIcon" />
+                                    <img src={temperatureIcon} alt="feelsLike icon" className="w-10 lg:w-[60px] p-1 bg-slate-800 rounded-full feelsLikeIcon" />
 
                                     {/* Replace with the feelsLike provided from the api */}
                                     <p className={`${darkTheme? "text-white" : "text-black"} text-xl pr-[15px] font-medium relative feelsLike `}>{Math.round(mainApiValue?.main?.feels_like)}<span className="text-[15px] absolute top-0 feelsLikeUnit">°c</span></p>
